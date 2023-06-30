@@ -1,0 +1,11 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:latest",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/apt-packages:1": {
+			"clean_ppas": true,
+			"preserve_apt_list": true,
+			"packages": "build-essential",
+			"ppas": "ppa:deadsnakes/ppa"
+		}
+	}
+}
