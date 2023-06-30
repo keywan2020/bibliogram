@@ -1,12 +1,9 @@
-FROM node:14.5.0-alpine as build
-RUN apk --no-cache add git python3 make g++
-WORKDIR /app
-COPY . .
-COPY ./.config.js.default ./config.js
-RUN npm install --no-optional
+FROM ubuntu:jammy
+MAINTAINER Open Source Integrators <support@opensourceintegrators.com>
 
-FROM node:14.5.0-alpine as app
-WORKDIR /app
-COPY --from=build /app /app
-EXPOSE 10407
-CMD ["npm", "start"]
+SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
+
+# Generate locale C.UTF-8
+ENV LANG C.UTF-8
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
