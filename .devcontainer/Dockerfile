@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
 # Generate locale C.UTF-8
 ENV LANG C.UTF-8
-ENV TZ=UTC
+ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt update \
@@ -22,7 +22,3 @@ RUN apt update \
   && apt clean all \
   && apt autoremove
 
-# Install dockerize for config files
-RUN curl -sfL $(curl -s https://api.github.com/repos/powerman/dockerize/releases/latest \
-  | grep -i /dockerize-$(uname -s)-$(uname -m)\" | cut -d\" -f4) \
-  | install /dev/stdin /usr/local/bin/dockerize
